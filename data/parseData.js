@@ -58,6 +58,12 @@ const parse = async () => {
     ]),
   );
 
+  // Get Impact Goal - it's the same for all rows, find first non-empty one
+  const impactGoal = model.reduce((goal, row) => {
+    if (goal) return goal; // If we already found a goal, keep it
+    return (row['Impact Goal'] || '').trim(); // Otherwise try this row
+  }, '');
+
   const data = {
     headerTooltips: headerTooltips.map(t => t[1]),
     inputs,
@@ -71,6 +77,7 @@ const parse = async () => {
     immediateOutputs,
     intermediateOutputs,
     longTermOutputs,
+    impactGoal,
   };
 
   research.forEach(r => {

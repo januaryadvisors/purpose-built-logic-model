@@ -5,7 +5,7 @@ const parseFromGoogleSheet = async () => {
   const d3dsv = await import('d3-dsv');
 
   // Google Sheet ID from your URL
-  const SHEET_ID = '1sSudr0w4J2Bc-CbY_abNqglTn9sEu-imJ8MydYHOT7A';
+  const SHEET_ID = '1xMLrp1nNKhQeHAnBdN-BpDdjVj_uuLIV06hKPe8wtBk';
   
   // Function to fetch CSV data from Google Sheet using node-fetch
   const fetchCSVFromSheet = async (sheetId, gid = 0) => {
@@ -90,6 +90,13 @@ const parseFromGoogleSheet = async () => {
       ]),
     );
 
+    // Get Impact Goal - it's the same for all rows, find first non-empty one
+    const impactGoal = model.reduce((goal, row) => {
+      if (goal) return goal; // If we already found a goal, keep it
+      return (row['Impact Goal'] || '').trim(); // Otherwise try this row
+    }, '');
+    console.log('🎯 Impact Goal loaded from Google Sheet:', impactGoal);
+
     const data = {
       headerTooltips: headerTooltips.map(t => t[1]),
       inputs,
@@ -102,6 +109,7 @@ const parseFromGoogleSheet = async () => {
       immediateOutputs,
       intermediateOutputs,
       longTermOutputs,
+      impactGoal,
     };
 
     research.forEach(r => {

@@ -570,38 +570,23 @@ window.onload = async function () {
     // Clear existing content - more thorough clearing
     researchBody.innerHTML = ''; // Complete clear instead of selective removal
 
-    // Show Activities instead of research
+    // Show Impact Goal
     const strategy = strategyList[strategyIndex];
     
-    if (strategy.activities && strategy.activities.trim()) {
-      const activitiesEl = createElement(researchBody, 'div', null, 'activities-section');
-      
-      // Add section header
-      const activitiesHeader = createElement(activitiesEl, 'div', 'activities-header');
-      activitiesHeader.innerText = 'List of Activities';
-      
-      // Create bullet list from activities
-      const activitiesList = document.createElement('ul');
-      activitiesList.className = `${NAMESPACE}-activities-list`;
-      
-      // Split activities by newlines and create list items
-      const activityItems = strategy.activities.split('\n')
-        .map(item => item.trim())
-        .filter(item => item.length > 0); // Remove empty lines
-      
-      activityItems.forEach(activity => {
-        const listItem = document.createElement('li');
-        listItem.className = `${NAMESPACE}-activity-item`;
-        listItem.innerText = activity;
-        activitiesList.appendChild(listItem);
-      });
-      
-      activitiesEl.appendChild(activitiesList);
-      
+    // Create header
+    const goalHeader = createElement(researchBody, 'div', 'goal-header');
+    goalHeader.innerText = 'Impact Goal';
+    
+    // Create goal content
+    const goalContent = createElement(researchBody, 'div', null, 'goal-content');
+    
+    // Since Impact Goal is the same for all strategies, we can use the first one
+    const impactGoal = data.impactGoal;
+    
+    if (impactGoal && impactGoal.trim()) {
+      goalContent.innerText = impactGoal;
     } else {
-      // Fallback if no activities data
-      const noActivitiesEl = createElement(researchBody, 'div', null, 'no-activities');
-      noActivitiesEl.innerText = 'No activities information available for this strategy.';
+      goalContent.innerText = 'No impact goal available.';
     }
 
     modal.style.display = 'block';
