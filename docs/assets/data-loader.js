@@ -294,7 +294,6 @@ window.DataLoader = (function() {
           if (goal) return goal; // If we already found a goal, keep it
           return (row['Impact Goal'] || '').trim(); // Otherwise try this row
         }, '');
-        console.log('🎯 Impact Goal loaded:', impactGoal); // Debug log
 
         // Build final data object
         const data = {

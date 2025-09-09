@@ -573,10 +573,6 @@ window.onload = async function () {
     // Show Impact Goal
     const strategy = strategyList[strategyIndex];
     
-    // Create header
-    const goalHeader = createElement(researchBody, 'div', 'goal-header');
-    goalHeader.innerText = 'Impact Goal';
-    
     // Create goal content
     const goalContent = createElement(researchBody, 'div', null, 'goal-content');
     

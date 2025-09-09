@@ -95,7 +95,6 @@ const parseFromGoogleSheet = async () => {
       if (goal) return goal; // If we already found a goal, keep it
       return (row['Impact Goal'] || '').trim(); // Otherwise try this row
     }, '');
-    console.log('🎯 Impact Goal loaded from Google Sheet:', impactGoal);
 
     const data = {
       headerTooltips: headerTooltips.map(t => t[1]),
